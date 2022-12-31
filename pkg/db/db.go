@@ -14,8 +14,9 @@ import (
 )
 
 type MongoInstance struct {
-	Client *mongo.Client
-	DB     *mongo.Database
+	Client     *mongo.Client
+	DB         *mongo.Database
+	Collection *mongo.Collection
 }
 
 var MI MongoInstance
@@ -48,7 +49,8 @@ func ConnectDB() {
 	fmt.Println("Database connected!")
 
 	MI = MongoInstance{
-		Client: client,
-		DB:     client.Database("fatawadb"),
+		Client:     client,
+		DB:         client.Database("fatawadb"),
+		Collection: client.Database("fatawadb").Collection("fatawa_ar"),
 	}
 }
