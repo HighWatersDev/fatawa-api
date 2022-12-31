@@ -10,7 +10,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 	"log"
-	//"net/http"
 )
 
 var (
@@ -25,7 +24,7 @@ func init() {
 
 	ctx := context.TODO()
 	db.ConnectDB()
-	// 👇 Add the Post Service, Controllers and Routes
+
 	fatwaCollection = db.MI.Collection
 	fatwaService = services.NewFatwaService(fatwaCollection, ctx)
 	FatwaController = controllers.NewFatwaController(fatwaService)
@@ -37,7 +36,6 @@ func init() {
 func startGinServer() {
 
 	corsConfig := cors.DefaultConfig()
-	//corsConfig.AllowOrigins = []string{"CLIENT_ORIGIN"}
 	corsConfig.AllowCredentials = true
 	corsConfig.AllowAllOrigins = true
 
@@ -45,7 +43,6 @@ func startGinServer() {
 
 	router := server.Group("/api/v1")
 
-	// 👇 Evoke the PostRoute
 	FatwaRouteController.FatwaRoute(router)
 	log.Fatal(server.Run(":3000"))
 }
