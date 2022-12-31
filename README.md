@@ -1,6 +1,6 @@
 # Fatawa API
 
-REST API server using Golang, Gin, and MongoDB.
+REST API server implemented using Golang, Gin, and MongoDB.
 
 This service is a backend implementation for [SalafiFatawa.org](https://salafifatawa.org) website.
 The service is implemented to provide API support to the website. The service is work-in-progress and is experimental at
