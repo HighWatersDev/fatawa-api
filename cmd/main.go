@@ -6,6 +6,7 @@ import (
 	"fatawa-api/pkg/db"
 	"fatawa-api/pkg/routes"
 	"fatawa-api/pkg/services"
+	"fmt"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -18,14 +19,22 @@ var (
 	FatwaController      controllers.FatwaController
 	fatwaCollection      *mongo.Collection
 	FatwaRouteController routes.FatwaRouteController
+	TableFatawa          controllers.TableFatawa
 )
 
 func init() {
 
 	ctx := context.TODO()
 	db.ConnectDB()
-
-	fatwaCollection = db.MI.Collection
+	db.ConnectDynamoDB()
+	fatwaTest := controllers.TableFatawa{TableName: "Fatawa", DynamoDbClient: db.DI.Client}
+	exists, err := controllers.TableFatawa.TableExists(fatwaTest)
+	if err != nil {
+		return
+	}
+	fmt.Println(exists)
+	controllers.
+		fatwaCollection = db.MI.Collection
 	fatwaService = services.NewFatwaService(fatwaCollection, ctx)
 	FatwaController = controllers.NewFatwaController(fatwaService)
 	FatwaRouteController = routes.NewFatwaControllerRoute(FatwaController)
