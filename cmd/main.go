@@ -19,7 +19,6 @@ var (
 	FatwaController      controllers.FatwaController
 	fatwaCollection      *mongo.Collection
 	FatwaRouteController routes.FatwaRouteController
-	TableFatawa          controllers.TableFatawa
 )
 
 func init() {
@@ -33,8 +32,8 @@ func init() {
 		return
 	}
 	fmt.Println(exists)
-	controllers.
-		fatwaCollection = db.MI.Collection
+
+	fatwaCollection = db.MI.Collection
 	fatwaService = services.NewFatwaService(fatwaCollection, ctx)
 	FatwaController = controllers.NewFatwaController(fatwaService)
 	FatwaRouteController = routes.NewFatwaControllerRoute(FatwaController)

@@ -22,15 +22,3 @@ func (r *FatwaRouteController) FatwaRoute(rg *gin.RouterGroup) {
 	router.PATCH("/:fatwaId", r.fatwaController.UpdateFatwa)
 	router.DELETE("/:fatwaId", r.fatwaController.DeleteFatwa)
 }
-
-func FatwaRouteDynamo(rg *gin.RouterGroup) {
-	router := rg.Group("/fatawaDynamo")
-
-	dynamo := new(controllers.TableFatawa)
-
-	router.GET("/", dynamo.)
-	router.GET("/:fatwaId", r.fatwaController.FindFatwaById)
-	router.POST("/", r.fatwaController.CreateFatwa)
-	router.PATCH("/:fatwaId", r.fatwaController.UpdateFatwa)
-	router.DELETE("/:fatwaId", r.fatwaController.DeleteFatwa)
-}
